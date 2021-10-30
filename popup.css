@@ -19,7 +19,25 @@ button {
     display: flex;
     flex-direction: column;
 }
+h2 {
+    margin-top: 0
+}
+p:not(:first-child) {
+    margin-top: 0;
+}
 
-.popup-text {
-    
+.more-text {
+    margin-bottom: 0;
+    padding-bottom: 8px;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s;
+    opacity: 0;
+}
+.more-text[show]{
+    max-height: 120px;
+    opacity: 1;
+}
+#seeMore, #seeMore:hover, #seeMore:visited, #seeMore:focus, #seeMore:active {
+    color: #06c;
 }

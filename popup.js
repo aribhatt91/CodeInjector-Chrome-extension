@@ -1,21 +1,16 @@
-function injectHTMLToHead (html) {
+const foldername = "experience";
+
+function injectHTML () {
     console.log('injecting HTML');
     try {
         chrome.storage.sync.get("html", ({html}) => {
-            let inject = () => {
-                let template = document.createElement('template');
-                template.innerHTML = html;
-                //console.log(template.content);
-                jQuery('head').append(template.content);
-            };
+            let template = document.createElement('template');
+            template.innerHTML = html;
+
             if (typeof jQuery === 'undefined') {
-                var script_jQuery = document.createElement('script');
-                script_jQuery.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js';
-                // call doStuff() after jQuery.js loads
-                script_jQuery.onload = inject;
-                document.body.appendChild(script_jQuery);            
+                jQuery('body').append(template.content);      
             }else {
-                inject();
+                document.body.appendChild(template.content); 
             }            
         });
     }catch(err){
@@ -24,9 +19,6 @@ function injectHTMLToHead (html) {
     }
     
 }
-
-
-    
 
 document.getElementById("injectHTML").addEventListener('click', () => {
     let xhr = new XMLHttpRequest();
@@ -37,11 +29,11 @@ document.getElementById("injectHTML").addEventListener('click', () => {
         chrome.storage.sync.set({ html: this.responseXML.head.innerHTML });
         chrome.scripting.executeScript({
             target: { tabId: tab.id },
-            function: injectHTMLToHead
+            function: injectHTML
         });
             
     };
-    xhr.open("GET", "./experience/index.html", true);
+    xhr.open("GET", `./${foldername}/index.html`, true);
     xhr.responseType = "document";
     xhr.send();
 });
@@ -51,7 +43,7 @@ document.getElementById("injectScript").addEventListener('click', async () => {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     chrome.scripting.executeScript({
         target: { tabId: tab.id },
-        files: ['./experience/script.js']
+        files: [`./${foldername}/script.js`]
     });
             
 });
@@ -61,9 +53,17 @@ document.getElementById("injectCSS").addEventListener('click', async () => {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     chrome.scripting.insertCSS({
         target: { tabId: tab.id },
-        files: ['./experience/style.css']
-    },
-    (res) => {
-        console.log('injectCSS -> ', res);
+        files: [`./${foldername}/style.css`]
     });
 });
+
+document.getElementById("seeMore").addEventListener('click', (e) => {
+    let moreText = document.querySelector('p.more-text');
+    if(moreText.hasAttribute('show')){
+        e.target.textContent = 'See more.';
+        moreText.removeAttribute('show');
+    }else {
+        e.target.textContent = 'See less.';
+        moreText.setAttribute('show', true);
+    }
+})

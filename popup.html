@@ -6,8 +6,11 @@
   <body>
     <div class="popup-container">
       <h2>Code Injector</h2>
-      <p>The extension injects custom HTML/JS/CSS code into the page.</p>
-      <button id="injectHTML">Inject HTML</button>
+      <p>The extension injects custom JS/CSS code into the page. <a href="javascript:void(0)" id="seeMore">See more.</a></p>
+      <p class="more-text">You may also inject HTML Templates using the <code>template</code> tag or JS Templates<br/>
+        <span>(<code>script</code> tags inside your HTML templates may not be executed if your page doesn't have <code>jQuery</code> loaded)</span>
+      </p>
+      <button id="injectHTML">Inject HTML Template</button>
       <button id="injectScript">Inject JS</button>
       <button id="injectCSS">Inject CSS</button>
     </div>
