@@ -1,4 +1,4 @@
-#Code Injector
+# Code Injector
 
 This is a small Chrome extension that allows you to inject JS, CSS and HTML snippets into a Web Page. 
 

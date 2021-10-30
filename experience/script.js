@@ -1,1 +1,1 @@
-console.log('This is a user defined script');
+alert('This is a user defined script');
