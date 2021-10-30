@@ -25,20 +25,45 @@ function injectHTMLToHead (html) {
     
 }
 
-let xhr = new XMLHttpRequest();
 
-xhr.onload = async function() {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    console.log(this.responseXML);
-    chrome.storage.sync.set({ html: this.responseXML.head.innerHTML });
-    chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        function: injectHTMLToHead
-    });
-        
-};
-xhr.open("GET", "./index.html", true);
-xhr.responseType = "document";
-xhr.send();
     
 
+document.getElementById("injectHTML").addEventListener('click', () => {
+    let xhr = new XMLHttpRequest();
+
+    xhr.onload = async function() {
+        let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+        console.log(this.responseXML);
+        chrome.storage.sync.set({ html: this.responseXML.head.innerHTML });
+        chrome.scripting.executeScript({
+            target: { tabId: tab.id },
+            function: injectHTMLToHead
+        });
+            
+    };
+    xhr.open("GET", "./experience/index.html", true);
+    xhr.responseType = "document";
+    xhr.send();
+});
+
+document.getElementById("injectScript").addEventListener('click', async () => {
+
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        files: ['./experience/script.js']
+    });
+            
+});
+
+document.getElementById("injectCSS").addEventListener('click', async () => {
+    console.log('injectCSS');
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    chrome.scripting.insertCSS({
+        target: { tabId: tab.id },
+        files: ['./experience/style.css']
+    },
+    (res) => {
+        console.log('injectCSS -> ', res);
+    });
+});
