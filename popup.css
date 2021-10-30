@@ -1,0 +1,21 @@
+button {
+    height: 30px;
+    width: auto;
+    outline: none;
+    margin: 10px;
+    padding: 8px 16px;
+    border: none;
+    background-color: #06c;
+    color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 0 0 2px white;
+}
+
+.popup-container {
+    min-width: 200px;
+    min-height: 200px;
+}
+
+.popup-text {
+    
+}
