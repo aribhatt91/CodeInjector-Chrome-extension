@@ -7,7 +7,7 @@ function injectHTML () {
             let template = document.createElement('template');
             template.innerHTML = html;
 
-            if (typeof jQuery === 'undefined') {
+            if (typeof jQuery === 'function') {
                 jQuery('body').append(template.content);      
             }else {
                 document.body.appendChild(template.content); 

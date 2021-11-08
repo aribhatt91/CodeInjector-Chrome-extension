@@ -1,1 +1,3 @@
-alert('This is a user defined script');
+(function() {
+	console.log('Logging test');
+})();
