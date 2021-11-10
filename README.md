@@ -6,4 +6,4 @@ The folder named 'test' contains 3 files index.html, script.js and style.css. As
 
 HTML snippets will be appended to the body. You may use templates in the HTML file and inject them using JavaScript.
 
-script tags embedded within the HTML content won't be executed unless your page supports jQuery.
+script tags embedded within the HTML content won't be executed.
